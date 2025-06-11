@@ -1,0 +1,35 @@
+# Master Data Scraper Configuration
+
+scraping:
+  default_delay: 1.0          # Seconds between requests
+  timeout: 30                 # Request timeout in seconds
+  max_retries: 3             # Maximum retry attempts
+  user_agent: "MasterDataScraper/1.0"
+  respect_robots: true       # Respect robots.txt
+  verify_ssl: true          # Verify SSL certificates
+
+output:
+  data_dir: "./Data"        # Base directory for scraped data
+  timestamp_format: "%Y-%m-%d_%H-%M-%S"
+  create_metadata: true     # Create metadata.json for each domain
+  max_file_size_mb: 100    # Maximum file size before warning
+
+logging:
+  log_level: "INFO"        # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  log_file: null           # null for auto-generated filename
+  log_rotation: "daily"    # daily, weekly, or size-based
+  log_retention_days: 30   # Days to keep old logs
+
+cache:
+  enable_cache: true       # Enable response caching
+  cache_dir: ".cache"      # Cache directory
+  cache_ttl: 3600         # Cache time-to-live in seconds
+  cache_max_size_mb: 100  # Maximum cache size
+
+rate_limiting:
+  rate_limit_default: 1.0    # Default seconds between requests
+  rate_limit_concurrent: 5   # Max concurrent requests
+
+export:
+  default_export_format: "csv"  # csv, json, md, txt
+  compress_exports: false       # Compress large exports
