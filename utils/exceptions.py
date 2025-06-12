@@ -245,6 +245,29 @@ class AuthenticationError(NetworkError):
         super().__init__(message, status_code=401, **kwargs)
 
 
+class CrawlError(ScraperException):
+    """Web crawling errors"""
+    
+    def __init__(self, message: str, start_url: Optional[str] = None,
+                 current_depth: Optional[int] = None, **kwargs):
+        """
+        Initialize crawl error
+        
+        Args:
+            message: Error message
+            start_url: Starting URL of the crawl
+            current_depth: Current crawl depth when error occurred
+            **kwargs: Additional details
+        """
+        details = kwargs
+        if start_url:
+            details['start_url'] = start_url
+        if current_depth is not None:
+            details['current_depth'] = current_depth
+        
+        super().__init__(message, details)
+
+
 # Error recovery strategies
 class ErrorRecovery:
     """Strategies for recovering from errors"""
@@ -271,6 +294,7 @@ class ErrorRecovery:
             CacheError: "Cache operation failed. Try clearing the cache.",
             TimeoutError: "Request took too long. The website might be slow or unresponsive.",
             AuthenticationError: "Authentication failed. Please check your credentials.",
+            CrawlError: "Web crawling failed. The site structure might be preventing crawling.",
         }
         
         for error_type, message in error_messages.items():
@@ -302,6 +326,7 @@ class ErrorRecovery:
             CacheError: "Try: 1) Clear the cache with --clear-cache, 2) Check disk space, 3) Verify cache directory permissions",
             TimeoutError: "Try: 1) Increase timeout setting, 2) Check website status, 3) Try during off-peak hours",
             AuthenticationError: "Try: 1) Verify credentials, 2) Check authentication method, 3) Refresh authentication tokens",
+            CrawlError: "Try: 1) Reduce crawl depth, 2) Add excluded patterns for problematic URLs, 3) Check if site allows crawling",
         }
         
         for error_type, action in recovery_actions.items():

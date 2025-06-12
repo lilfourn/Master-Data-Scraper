@@ -16,15 +16,79 @@ logger = logging.getLogger(__name__)
 class HTMLParser:
     """Factory class for creating appropriate parsers for different HTML elements"""
     
-    def __init__(self, html: str, parser: str = "lxml"):
+    def __init__(self, html: str, parser: str = "lxml", settings: Optional[Any] = None):
         """
         Initialize the HTML parser
         
         Args:
             html: HTML content to parse
             parser: BeautifulSoup parser to use (default: lxml)
+            settings: Optional settings object for customization
         """
         self.soup = BeautifulSoup(html, parser)
+        self.settings = settings
+        
+        # Get settings or use defaults
+        if settings:
+            self.scrape_scripts = settings.scrape_scripts
+            self.scrape_styles = settings.scrape_styles
+            self.scrape_comments = settings.scrape_comments
+            self.clean_whitespace = settings.clean_whitespace
+        else:
+            self.scrape_scripts = False
+            self.scrape_styles = False
+            self.scrape_comments = False
+            self.clean_whitespace = True
+            
+        self._clean_html()
+    
+    def _clean_html(self):
+        """Remove unwanted elements from HTML based on settings"""
+        # Conditionally remove script elements
+        if not self.scrape_scripts:
+            for script in self.soup(['script', 'noscript']):
+                script.decompose()
+        
+        # Conditionally remove style elements
+        if not self.scrape_styles:
+            for style in self.soup(['style']):
+                style.decompose()
+        
+        # Conditionally remove comments
+        if not self.scrape_comments:
+            from bs4 import Comment
+            for comment in self.soup.find_all(string=lambda text: isinstance(text, Comment)):
+                comment.extract()
+        
+        # Always remove ads and tracking elements
+        ad_selectors = [
+            '[class*="ad-"]', '[class*="ads-"]', '[class*="advertisement"]',
+            '[id*="ad-"]', '[id*="ads-"]', '[id*="advertisement"]',
+            '[class*="banner"]', '[class*="sponsor"]', '[class*="promo"]',
+            '.ad', '.ads', '.advertisement', '.adsense', '.adsbygoogle',
+            '#ad', '#ads', '#advertisement', '#adsense',
+            'iframe[src*="doubleclick"]', 'iframe[src*="googlesyndication"]',
+            'iframe[src*="facebook"]', 'iframe[src*="twitter"]'
+        ]
+        
+        for selector in ad_selectors:
+            for element in self.soup.select(selector):
+                element.decompose()
+        
+        # Remove social media embeds
+        social_tags = ['twitter-widget', 'fb-post', 'instagram-media']
+        for tag in social_tags:
+            for element in self.soup.find_all(tag):
+                element.decompose()
+        
+        # Remove video and audio elements (keep text description if any)
+        for media in self.soup(['video', 'audio', 'embed', 'object']):
+            media.decompose()
+        
+        # Remove empty elements
+        for element in self.soup.find_all():
+            if not element.get_text(strip=True) and element.name not in ['br', 'hr', 'img']:
+                element.decompose()
     
     def parse(self, element_type: str, **kwargs) -> Union[List[Dict], pd.DataFrame, List[str]]:
         """
@@ -194,9 +258,17 @@ class HTMLParser:
         for elem in elements:
             data = {
                 'tag': elem.name,
-                'text': elem.get_text(strip=True),
-                'attrs': dict(elem.attrs) if elem.attrs else {}
+                'text': elem.get_text(strip=self.clean_whitespace if self.settings else True),
             }
+            
+            # Include attributes if settings allow
+            if not self.settings or self.settings.include_attributes:
+                data['attrs'] = dict(elem.attrs) if elem.attrs else {}
+                
+            # Include parent info if available
+            if elem.parent and elem.parent.name != '[document]':
+                data['parent_tag'] = elem.parent.name
+                
             result.append(data)
         
         return result
@@ -221,3 +293,61 @@ class HTMLParser:
             return f"Found {len(data)} items. Preview:\n" + "\n".join(str(item) for item in preview_items)
         else:
             return "No elements found"
+    
+    def extract_metadata(self) -> Dict[str, Any]:
+        """
+        Extract metadata from the HTML page
+        
+        Returns:
+            Dictionary containing page metadata
+        """
+        metadata = {}
+        
+        # Extract title
+        title_tag = self.soup.find('title')
+        metadata['title'] = title_tag.get_text(strip=True) if title_tag else None
+        
+        # Extract meta tags
+        meta_tags = {}
+        for meta in self.soup.find_all('meta'):
+            if meta.get('name'):
+                meta_tags[meta.get('name')] = meta.get('content', '')
+            elif meta.get('property'):
+                meta_tags[meta.get('property')] = meta.get('content', '')
+            elif meta.get('http-equiv'):
+                meta_tags[meta.get('http-equiv')] = meta.get('content', '')
+        
+        metadata['meta_tags'] = meta_tags
+        
+        # Extract headers info if settings allow
+        if self.settings and self.settings.scrape_headers:
+            headers = {}
+            for i in range(1, 7):
+                h_tags = self.soup.find_all(f'h{i}')
+                if h_tags:
+                    headers[f'h{i}'] = [h.get_text(strip=True) for h in h_tags[:5]]  # First 5 of each
+            metadata['headers'] = headers
+        
+        # Extract images info if settings allow
+        if self.settings and self.settings.scrape_images:
+            images = []
+            for img in self.soup.find_all('img')[:10]:  # First 10 images
+                img_data = {
+                    'src': img.get('src', ''),
+                    'alt': img.get('alt', ''),
+                    'title': img.get('title', '')
+                }
+                images.append(img_data)
+            metadata['images'] = images
+        
+        # Extract language
+        html_tag = self.soup.find('html')
+        if html_tag:
+            metadata['language'] = html_tag.get('lang', '')
+        
+        # Extract canonical URL
+        canonical = self.soup.find('link', {'rel': 'canonical'})
+        if canonical:
+            metadata['canonical_url'] = canonical.get('href', '')
+        
+        return metadata

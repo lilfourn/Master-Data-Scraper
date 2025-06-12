@@ -55,9 +55,28 @@ class InputValidator:
         # Check accessibility if requested
         if check_accessibility:
             try:
-                response = requests.head(url, timeout=10, allow_redirects=True)
-                if response.status_code >= 400:
+                # Use a browser-like user agent to avoid blocks
+                headers = {
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                }
+                response = requests.head(url, timeout=10, allow_redirects=True, headers=headers)
+                
+                if response.status_code == 429:
+                    # Extract domain for specific advice
+                    domain = urlparse(url).netloc
+                    return False, (f"Rate limit error (429) from {domain}. "
+                                 f"This site has rate limiting protection. "
+                                 f"Try again in a few seconds or adjust the rate limit in config/domains.yaml")
+                elif response.status_code == 403:
+                    return False, (f"Access forbidden (403) from {urlparse(url).netloc}. "
+                                 f"This site may block automated requests. "
+                                 f"Consider using different headers or checking robots.txt")
+                elif response.status_code >= 400:
                     return False, f"URL returned status code {response.status_code}"
+            except requests.exceptions.Timeout:
+                return False, "URL request timed out after 10 seconds"
+            except requests.exceptions.ConnectionError:
+                return False, "Could not connect to the URL (connection error)"
             except requests.RequestException as e:
                 return False, f"URL is not accessible: {str(e)}"
         

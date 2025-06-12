@@ -100,7 +100,10 @@ class FileOrganizer:
                          element_type: str, 
                          format_type: str,
                          timestamp: Optional[datetime] = None,
-                         custom_name: Optional[str] = None) -> Path:
+                         custom_name: Optional[str] = None,
+                         prefix: Optional[str] = None,
+                         settings: Optional[Any] = None,
+                         page_title: Optional[str] = None) -> Path:
         """
         Generate a filename following the naming convention
         
@@ -110,6 +113,9 @@ class FileOrganizer:
             format_type: Output format (csv, json, etc.)
             timestamp: Optional timestamp (defaults to now)
             custom_name: Optional custom name component
+            prefix: Optional prefix for the filename
+            settings: Optional settings object for naming customization
+            page_title: Optional page title for naming
             
         Returns:
             Full path to the output file
@@ -117,24 +123,120 @@ class FileOrganizer:
         domain = self.get_domain_from_url(url)
         timestamp = timestamp or datetime.now()
         
-        # Format timestamp
-        time_str = timestamp.strftime("%Y-%m-%d_%H-%M-%S")
+        if settings and hasattr(settings, 'naming_template'):
+            # Use custom naming template
+            filename = self._generate_from_template(
+                template=settings.naming_template,
+                url=url,
+                domain=domain,
+                element_type=element_type,
+                timestamp=timestamp,
+                settings=settings,
+                page_title=page_title,
+                custom_name=custom_name
+            )
+        else:
+            # Use legacy naming convention
+            time_str = timestamp.strftime("%Y-%m-%d_%H-%M-%S")
+            
+            # Build filename components
+            components = []
+            
+            if prefix:
+                components.append(self.sanitize_filename(prefix))
+            
+            components.append(time_str)
+            
+            if custom_name:
+                components.append(self.sanitize_filename(custom_name))
+            
+            components.append(element_type)
+            
+            # Join components
+            filename = "_".join(components)
         
-        # Build filename components
-        components = [time_str]
+        # Ensure filename doesn't exceed max length
+        if settings and hasattr(settings, 'naming_max_length'):
+            max_length = settings.naming_max_length - len(format_type) - 1  # Account for extension
+            if len(filename) > max_length:
+                filename = filename[:max_length]
         
-        if custom_name:
-            components.append(self.sanitize_filename(custom_name))
-        
-        components.append(element_type)
-        
-        # Join components
-        filename = "_".join(components) + f".{format_type}"
+        # Add extension
+        filename = f"{filename}.{format_type}"
         
         # Get domain directory
         domain_dir = self.create_domain_directory(url)
         
         return domain_dir / filename
+    
+    def _generate_from_template(self, template: str, url: str, domain: str, 
+                              element_type: str, timestamp: datetime,
+                              settings: Any, page_title: Optional[str] = None,
+                              custom_name: Optional[str] = None) -> str:
+        """
+        Generate filename from template string
+        
+        Args:
+            template: Template string with placeholders
+            url: Source URL
+            domain: Domain name
+            element_type: Type of element
+            timestamp: Timestamp
+            settings: Settings object
+            page_title: Optional page title
+            custom_name: Optional custom name
+            
+        Returns:
+            Generated filename
+        """
+        from urllib.parse import urlparse
+        import re
+        
+        # Create URL slug if needed
+        url_slug = ""
+        if settings.naming_use_url_slug:
+            parsed = urlparse(url)
+            path = parsed.path.strip('/')
+            if path:
+                # Convert path to slug
+                url_slug = re.sub(r'[^\w\-]', '_', path)
+                url_slug = re.sub(r'_+', '_', url_slug)
+                url_slug = url_slug.strip('_')[:30]  # Limit length
+        
+        # Format timestamp based on settings
+        date_format = settings.naming_date_format if hasattr(settings, 'naming_date_format') else "%Y%m%d_%H%M%S"
+        timestamp_str = timestamp.strftime(date_format)
+        
+        # Create replacements dictionary
+        replacements = {
+            'timestamp': timestamp_str,
+            'date': timestamp.strftime('%Y%m%d'),
+            'time': timestamp.strftime('%H%M%S'),
+            'year': timestamp.strftime('%Y'),
+            'month': timestamp.strftime('%m'),
+            'day': timestamp.strftime('%d'),
+            'hour': timestamp.strftime('%H'),
+            'minute': timestamp.strftime('%M'),
+            'second': timestamp.strftime('%S'),
+            'domain': domain.replace('.', '_'),
+            'element': element_type,
+            'element_type': element_type,
+            'title': self.sanitize_filename(page_title[:50]) if page_title else 'untitled',
+            'custom': self.sanitize_filename(custom_name) if custom_name else '',
+            'slug': url_slug,
+        }
+        
+        # Apply template replacements
+        filename = template
+        for key, value in replacements.items():
+            filename = filename.replace(f'{{{key}}}', value)
+        
+        # Clean up any empty placeholders or multiple underscores
+        filename = re.sub(r'\{[^}]*\}', '', filename)  # Remove unused placeholders
+        filename = re.sub(r'_+', '_', filename)  # Remove multiple underscores
+        filename = filename.strip('_')  # Remove leading/trailing underscores
+        
+        return self.sanitize_filename(filename)
     
     def update_metadata(self, 
                        url: str, 

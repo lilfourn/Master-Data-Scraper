@@ -6,6 +6,7 @@ responsible scraping practices.
 """
 
 import time
+import asyncio
 from collections import defaultdict
 from typing import Optional, Dict, Callable
 from functools import wraps
@@ -248,3 +249,60 @@ class AdaptiveRateLimiter(RateLimiter):
                 new_delay = min(self.max_delay, current_delay * self.backoff_factor)
                 self.update_domain_delay(domain, new_delay)
                 self.error_count[domain] = 0
+
+
+class AsyncRateLimiter:
+    """
+    Asynchronous rate limiter for async web scraping
+    """
+    
+    def __init__(self, 
+                 default_delay: float = 1.0,
+                 domain_delays: Optional[Dict[str, float]] = None):
+        """
+        Initialize async rate limiter
+        
+        Args:
+            default_delay: Default delay between requests (seconds)
+            domain_delays: Custom delays for specific domains
+        """
+        self.default_delay = default_delay
+        self.domain_delays = domain_delays or {}
+        self.last_request_time = defaultdict(float)
+        self._lock = asyncio.Lock()
+    
+    def get_delay_for_domain(self, domain: str) -> float:
+        """Get delay for a specific domain"""
+        return self.domain_delays.get(domain, self.default_delay)
+    
+    async def wait_if_needed(self, domain: str) -> float:
+        """
+        Wait if necessary to respect rate limit (async version)
+        
+        Args:
+            domain: Domain being accessed
+            
+        Returns:
+            Actual wait time in seconds
+        """
+        async with self._lock:
+            current_time = asyncio.get_event_loop().time()
+            last_request = self.last_request_time[domain]
+            required_delay = self.get_delay_for_domain(domain)
+            
+            time_since_last = current_time - last_request
+            
+            if time_since_last < required_delay:
+                wait_time = required_delay - time_since_last
+                logger.debug(f"Async rate limiting: waiting {wait_time:.2f}s for {domain}")
+                await asyncio.sleep(wait_time)
+                self.last_request_time[domain] = asyncio.get_event_loop().time()
+                return wait_time
+            else:
+                self.last_request_time[domain] = current_time
+                return 0
+    
+    def update_domain_delay(self, domain: str, delay: float) -> None:
+        """Update delay for a specific domain"""
+        self.domain_delays[domain] = delay
+        logger.info(f"Updated async rate limit for {domain}: {delay}s")

@@ -1,0 +1,126 @@
+# Stealth Configuration for Master Data Scraper
+# Controls anti-detection and human behavior simulation
+
+stealth:
+  # Enable/disable stealth features
+  enabled: true
+  
+  # User agent rotation settings
+  user_agent_rotation:
+    enabled: true
+    rotate_after_requests: 10  # Rotate UA after N requests
+    rotate_on_rate_limit: true  # Always rotate after 429
+    prefer_desktop: true  # Prefer desktop over mobile UAs
+    
+  # Header configuration
+  headers:
+    randomize_accept_language: true
+    randomize_accept_encoding: false  # Keep standard encoding
+    include_dnt: true  # Do Not Track header
+    include_upgrade_insecure: true
+    
+  # Browser fingerprinting
+  fingerprinting:
+    randomize_canvas: true
+    randomize_webgl: true
+    randomize_audio: true
+    randomize_fonts: true
+    consistent_per_session: true  # Keep fingerprint for session
+    
+  # Cookie management
+  cookies:
+    persist_per_domain: true
+    clean_after_days: 7
+    accept_third_party: false
+
+human_behavior:
+  # Enable human-like delays and patterns
+  enabled: true
+  
+  # Delay configuration (in seconds)
+  delays:
+    min_delay: 1.0  # Minimum delay between requests
+    max_delay: 5.0  # Maximum normal delay
+    read_speed_wpm: 250  # Words per minute for content
+    
+  # Behavior profiles (weights for random selection)
+  profiles:
+    fast_reader: 0.2    # Quick, efficient browsing
+    normal_reader: 0.5  # Average browsing speed
+    slow_reader: 0.2    # Careful, thorough reading
+    curious_reader: 0.1 # Explores many links
+    
+  # Break patterns
+  breaks:
+    enabled: true
+    short_break_probability: 0.1  # 10% chance after each request
+    short_break_duration: [5, 15]  # 5-15 seconds
+    long_break_after_requests: 50  # Force break after N requests
+    long_break_duration: [30, 120]  # 30-120 seconds
+    
+  # Time-based patterns
+  time_patterns:
+    enabled: false  # Disable by default (can slow scraping)
+    peak_hours: [9, 17]  # 9 AM - 5 PM
+    off_peak_slowdown: 0.5  # 50% slower outside peak
+    
+  # Request patterns
+  patterns:
+    follow_links_probability: 0.3  # Chance to follow discovered links
+    max_depth_variance: 1  # Random depth variation
+    backtrack_probability: 0.1  # Chance to revisit pages
+
+rate_limit_handling:
+  # Exponential backoff configuration
+  backoff:
+    initial_delay: 2.0
+    max_delay: 300.0  # 5 minutes max
+    multiplier: 2.0
+    jitter: 0.2  # 20% randomization
+    
+  # Adaptive delays
+  adaptive:
+    enabled: true
+    increase_on_slow_response: true
+    slow_response_threshold: 3.0  # seconds
+    adjustment_factor: 1.5
+    
+  # Per-domain overrides
+  domain_specific:
+    # High-security sites
+    linkedin.com:
+      min_delay: 3.0
+      max_delay: 10.0
+      rotate_ua_always: true
+    facebook.com:
+      min_delay: 2.0
+      max_delay: 8.0
+    # Academic/reference sites
+    wikipedia.org:
+      min_delay: 0.5
+      max_delay: 2.0
+    # Sports reference sites
+    basketball-reference.com:
+      min_delay: 3.0
+      max_delay: 8.0
+      break_probability: 0.2
+    
+# Advanced features (use with caution)
+advanced:
+  # Proxy rotation
+  proxy:
+    enabled: false
+    rotate_on_rate_limit: true
+    sticky_sessions: true
+    
+  # JavaScript execution (requires Playwright/Puppeteer)
+  javascript:
+    enabled: false
+    headless: true
+    stealth_mode: true
+    
+  # Request ordering
+  request_order:
+    randomize: true  # Don't be too predictable
+    simulate_referrer_chain: true
+    max_referrer_depth: 3

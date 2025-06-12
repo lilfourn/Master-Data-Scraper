@@ -1,0 +1,131 @@
+2025-06-11 17:53:12,800 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 17:55:35,999 - core.scraper - INFO - GET https://www.basketball-reference.com/wnba/years/2025_per_game.html - Status: 200 - Time: 0.18s
+2025-06-11 17:58:12,453 - core.crawler - INFO - Successfully crawled: https://www.basketball-reference.com/wnba/years/2025_per_game.html (depth: 0)
+2025-06-11 17:58:12,503 - core.scraper - INFO - GET https://www.basketball-reference.com/short/inc/main_nav_menu.json - Status: 200 - Time: 0.05s
+2025-06-11 17:58:25,527 - core.crawler - INFO - Successfully crawled: https://www.basketball-reference.com/short/inc/main_nav_menu.json (depth: 1)
+2025-06-11 18:06:39,238 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 18:16:52,675 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 18:21:21,948 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:20:49,516 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:25:34,067 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:28:42,737 - numexpr.utils - INFO - Note: NumExpr detected 14 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-06-11 19:28:42,739 - numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+2025-06-11 19:28:44,893 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:29:05,705 - numexpr.utils - INFO - Note: NumExpr detected 14 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-06-11 19:29:05,706 - numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+2025-06-11 19:29:05,818 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:29:28,862 - numexpr.utils - INFO - Note: NumExpr detected 14 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-06-11 19:29:28,864 - numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+2025-06-11 19:29:28,991 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:30:16,013 - numexpr.utils - INFO - Note: NumExpr detected 14 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-06-11 19:30:16,014 - numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+2025-06-11 19:30:16,137 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:30:16,142 - core.stealth_scraper - INFO - Request scheduler suggests waiting 3.0s
+2025-06-11 19:30:19,196 - core.web_scraper - ERROR - Error scraping https://example.com: 'HeaderGenerator' object has no attribute 'generate'
+2025-06-11 19:30:59,170 - numexpr.utils - INFO - Note: NumExpr detected 14 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-06-11 19:30:59,172 - numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+2025-06-11 19:30:59,296 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:30:59,301 - core.stealth_scraper - INFO - Request scheduler suggests waiting 0.7s
+2025-06-11 19:31:00,055 - core.web_scraper - ERROR - Error scraping https://example.com: 'HumanDelay' object has no attribute 'thinking_delay'
+2025-06-11 19:31:43,540 - numexpr.utils - INFO - Note: NumExpr detected 14 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-06-11 19:31:43,542 - numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+2025-06-11 19:31:43,658 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:31:43,663 - core.stealth_scraper - INFO - Request scheduler suggests waiting 1.4s
+2025-06-11 19:31:48,601 - urllib3.connectionpool - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x152a80980>: Failed to establish a new connection: [Errno 61] Connection refused')': /
+2025-06-11 19:31:49,209 - urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1682a88c0>: Failed to establish a new connection: [Errno 61] Connection refused')': /
+2025-06-11 19:31:50,418 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1682a8110>: Failed to establish a new connection: [Errno 61] Connection refused')': /
+2025-06-11 19:31:50,423 - core.scraper - ERROR - Error fetching https://example.com: HTTPSConnectionPool(host='example.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1682a8230>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-06-11 19:31:50,425 - core.web_scraper - ERROR - Error scraping https://example.com: HTTPSConnectionPool(host='example.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x1682a8230>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-06-11 19:31:57,775 - numexpr.utils - INFO - Note: NumExpr detected 14 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-06-11 19:31:57,777 - numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+2025-06-11 19:31:57,900 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:31:57,905 - core.stealth_scraper - INFO - Request scheduler suggests waiting 4.1s
+2025-06-11 19:32:07,609 - core.scraper - INFO - GET https://httpbin.org/html - Status: 200 - Time: 0.23s
+2025-06-11 19:32:07,612 - core.web_scraper - ERROR - Error scraping https://httpbin.org/html: unsupported operand type(s) for /: 'Response' and 'int'
+2025-06-11 19:34:10,422 - numexpr.utils - INFO - Note: NumExpr detected 14 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-06-11 19:34:10,424 - numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+2025-06-11 19:34:10,551 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:34:10,556 - core.stealth_scraper - INFO - Request scheduler suggests waiting 2.5s
+2025-06-11 19:34:20,374 - core.scraper - INFO - GET https://httpbin.org/html - Status: 200 - Time: 0.25s
+2025-06-11 19:34:20,378 - core.web_scraper - ERROR - Error scraping https://httpbin.org/html: unsupported operand type(s) for /: 'Response' and 'int'
+2025-06-11 19:41:07,927 - numexpr.utils - INFO - Note: NumExpr detected 14 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-06-11 19:41:07,929 - numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+2025-06-11 19:41:08,072 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:41:08,077 - core.stealth_scraper - INFO - Request scheduler suggests waiting 3.3s
+2025-06-11 19:41:15,922 - core.scraper - INFO - GET https://httpbin.org/html - Status: 200 - Time: 0.25s
+2025-06-11 19:41:15,926 - core.stealth_scraper - INFO - Taking a short break (35.3s)
+2025-06-11 19:41:51,188 - core.exporter - INFO - Exported text to Data/httpbin.org/2025-06-11_19-41-51_p.txt
+2025-06-11 19:41:51,189 - core.web_scraper - INFO - Data saved to: Data/httpbin.org/2025-06-11_19-41-51_p.txt
+2025-06-11 19:42:37,047 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 19:43:25,237 - core.scraper - INFO - GET https://www.basketball-reference.com/wnba/years/2025_per_game.html - Status: 200 - Time: 0.12s
+2025-06-11 19:43:36,529 - core.scraper - INFO - GET https://btloader.com - Status: 403 - Time: 0.12s
+2025-06-11 19:43:36,530 - core.scraper - ERROR - Error fetching https://btloader.com: 403 Client Error: Forbidden for url: https://btloader.com/
+2025-06-11 19:43:36,552 - core.scraper - INFO - GET https://cdn.ssref.net - Status: 200 - Time: 0.42s
+2025-06-11 19:43:36,751 - core.scraper - INFO - GET https://d.pub.network - Status: 404 - Time: 0.18s
+2025-06-11 19:43:36,752 - core.scraper - ERROR - Error fetching https://d.pub.network: 404 Client Error: Not Found for url: https://d.pub.network/
+2025-06-11 19:43:37,074 - urllib3.connectionpool - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x1282a3250>: Failed to resolve 'b.pub.network' ([Errno 8] nodename nor servname provided, or not known)")': /
+2025-06-11 19:43:37,680 - urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x12eaf47d0>: Failed to resolve 'b.pub.network' ([Errno 8] nodename nor servname provided, or not known)")': /
+2025-06-11 19:43:37,710 - core.scraper - INFO - GET https://cdn.ssref.net/req/202505152 - Status: 404 - Time: 0.16s
+2025-06-11 19:43:37,711 - core.scraper - ERROR - Error fetching https://cdn.ssref.net/req/202505152: 404 Client Error: Not Found for url: https://cdn.ssref.net/req/202505152
+2025-06-11 19:43:38,312 - core.scraper - INFO - GET https://www.googletagservices.com - Status: 404 - Time: 0.07s
+2025-06-11 19:43:38,313 - core.scraper - ERROR - Error fetching https://www.googletagservices.com: 404 Client Error: Not Found for url: https://www.googletagservices.com/
+2025-06-11 19:43:38,885 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x12eaf4a50>: Failed to resolve 'b.pub.network' ([Errno 8] nodename nor servname provided, or not known)")': /
+2025-06-11 19:43:38,892 - core.scraper - ERROR - Error fetching https://b.pub.network: HTTPSConnectionPool(host='b.pub.network', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x1282a3110>: Failed to resolve 'b.pub.network' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-06-11 19:43:39,196 - core.scraper - INFO - GET https://a.pub.network - Status: 200 - Time: 0.13s
+2025-06-11 19:43:39,199 - core.stealth_scraper - INFO - Taking a short break (40.8s)
+2025-06-11 19:43:44,381 - core.scraper - INFO - GET https://confiant-integrations.global.ssl.fastly.net - Status: 403 - Time: 0.27s
+2025-06-11 19:43:44,383 - core.scraper - ERROR - Error fetching https://confiant-integrations.global.ssl.fastly.net: 403 Client Error: Forbidden for url: https://confiant-integrations.global.ssl.fastly.net/
+2025-06-11 19:43:45,505 - core.scraper - INFO - GET https://c.pub.network - Status: 404 - Time: 0.09s
+2025-06-11 19:43:45,505 - core.scraper - ERROR - Error fetching https://c.pub.network: 404 Client Error: Not Found for url: https://c.pub.network/
+2025-06-11 19:44:19,993 - core.fast_crawler - INFO - Fast crawl completed: 3 successful, 8 failed, 1 matched
+2025-06-11 19:44:20,321 - core.exporter - INFO - Exported CSV to Data/basketball-reference.com/fast_crawl_0_2025-06-11_19-44-20_table_table_1.csv
+2025-06-11 19:44:20,321 - core.exporter - INFO - Exported 1 CSV tables to Data/basketball-reference.com
+2025-06-11 20:11:00,582 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 20:11:44,399 - core.stealth_scraper - INFO - Taking a short break (15.0s)
+2025-06-11 20:11:59,453 - core.scraper - INFO - GET https://www.basketball-reference.com/wnba/years/2025_per_game.html - Status: 200 - Time: 0.09s
+2025-06-11 20:12:07,685 - core.stealth_scraper - INFO - Taking a short break (11.4s)
+2025-06-11 20:12:13,057 - core.scraper - INFO - GET https://cdn.ssref.net/req/202505152 - Status: 404 - Time: 0.41s
+2025-06-11 20:12:13,061 - core.scraper - ERROR - Error fetching https://cdn.ssref.net/req/202505152: 404 Client Error: Not Found for url: https://cdn.ssref.net/req/202505152
+2025-06-11 20:12:13,757 - core.scraper - INFO - GET https://btloader.com - Status: 403 - Time: 0.13s
+2025-06-11 20:12:13,758 - core.scraper - ERROR - Error fetching https://btloader.com: 403 Client Error: Forbidden for url: https://btloader.com/
+2025-06-11 20:12:14,692 - urllib3.connectionpool - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x1255002d0>: Failed to resolve 'b.pub.network' ([Errno 8] nodename nor servname provided, or not known)")': /
+2025-06-11 20:12:14,704 - core.scraper - INFO - GET https://confiant-integrations.global.ssl.fastly.net - Status: 403 - Time: 0.43s
+2025-06-11 20:12:14,705 - core.scraper - ERROR - Error fetching https://confiant-integrations.global.ssl.fastly.net: 403 Client Error: Forbidden for url: https://confiant-integrations.global.ssl.fastly.net/
+2025-06-11 20:12:14,781 - core.scraper - INFO - GET https://d.pub.network - Status: 404 - Time: 0.18s
+2025-06-11 20:12:14,783 - core.scraper - ERROR - Error fetching https://d.pub.network: 404 Client Error: Not Found for url: https://d.pub.network/
+2025-06-11 20:12:15,096 - core.scraper - INFO - GET https://cdn.ssref.net - Status: 200 - Time: 0.15s
+2025-06-11 20:12:15,301 - urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x125500b90>: Failed to resolve 'b.pub.network' ([Errno 8] nodename nor servname provided, or not known)")': /
+2025-06-11 20:12:16,512 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x125500e10>: Failed to resolve 'b.pub.network' ([Errno 8] nodename nor servname provided, or not known)")': /
+2025-06-11 20:12:16,516 - core.scraper - ERROR - Error fetching https://b.pub.network: HTTPSConnectionPool(host='b.pub.network', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x116c43c50>: Failed to resolve 'b.pub.network' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-06-11 20:12:23,561 - core.scraper - INFO - GET https://c.pub.network - Status: 404 - Time: 0.33s
+2025-06-11 20:12:23,562 - core.scraper - ERROR - Error fetching https://c.pub.network: 404 Client Error: Not Found for url: https://c.pub.network/
+2025-06-11 20:12:24,118 - core.scraper - INFO - GET https://www.googletagservices.com - Status: 404 - Time: 0.11s
+2025-06-11 20:12:24,119 - core.scraper - ERROR - Error fetching https://www.googletagservices.com: 404 Client Error: Not Found for url: https://www.googletagservices.com/
+2025-06-11 20:12:29,607 - core.scraper - INFO - GET https://a.pub.network - Status: 200 - Time: 0.14s
+2025-06-11 20:12:59,628 - core.fast_crawler - INFO - Fast crawl completed: 3 successful, 8 failed, 1 matched
+2025-06-11 20:12:59,942 - core.exporter - INFO - Exported CSV to Data/basketball-reference.com/fast_crawl_0_2025-06-11_20-12-59_table_table_1.csv
+2025-06-11 20:12:59,943 - core.exporter - INFO - Exported 1 CSV tables to Data/basketball-reference.com
+2025-06-11 20:43:39,753 - config.settings - INFO - Using config file: config/settings.yaml
+2025-06-11 20:44:28,711 - core.scraper - INFO - GET https://www.basketball-reference.com/wnba/years/2025_per_game.html - Status: 200 - Time: 0.12s
+2025-06-11 20:44:36,947 - core.stealth_scraper - INFO - Taking a short break (15.0s)
+2025-06-11 20:44:38,393 - core.scraper - INFO - GET https://www.googletagservices.com - Status: 404 - Time: 0.08s
+2025-06-11 20:44:38,394 - core.scraper - ERROR - Error fetching https://www.googletagservices.com: 404 Client Error: Not Found for url: https://www.googletagservices.com/
+2025-06-11 20:44:39,248 - core.scraper - INFO - GET https://btloader.com - Status: 403 - Time: 0.14s
+2025-06-11 20:44:39,251 - core.scraper - ERROR - Error fetching https://btloader.com: 403 Client Error: Forbidden for url: https://btloader.com/
+2025-06-11 20:44:39,319 - urllib3.connectionpool - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11962ccd0>: Failed to resolve 'b.pub.network' ([Errno 8] nodename nor servname provided, or not known)")': /
+2025-06-11 20:44:39,417 - core.scraper - INFO - GET https://a.pub.network - Status: 200 - Time: 0.16s
+2025-06-11 20:44:39,738 - core.scraper - INFO - GET https://d.pub.network - Status: 404 - Time: 0.18s
+2025-06-11 20:44:39,740 - core.scraper - ERROR - Error fetching https://d.pub.network: 404 Client Error: Not Found for url: https://d.pub.network/
+2025-06-11 20:44:39,926 - urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11962d450>: Failed to resolve 'b.pub.network' ([Errno 8] nodename nor servname provided, or not known)")': /
+2025-06-11 20:44:40,110 - core.scraper - INFO - GET https://c.pub.network - Status: 404 - Time: 0.28s
+2025-06-11 20:44:40,113 - core.scraper - ERROR - Error fetching https://c.pub.network: 404 Client Error: Not Found for url: https://c.pub.network/
+2025-06-11 20:44:41,136 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11962d950>: Failed to resolve 'b.pub.network' ([Errno 8] nodename nor servname provided, or not known)")': /
+2025-06-11 20:44:41,140 - core.scraper - ERROR - Error fetching https://b.pub.network: HTTPSConnectionPool(host='b.pub.network', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11962da90>: Failed to resolve 'b.pub.network' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-06-11 20:44:41,886 - core.scraper - INFO - GET https://cdn.ssref.net - Status: 200 - Time: 0.14s
+2025-06-11 20:44:43,968 - core.scraper - INFO - GET https://cdn.ssref.net/req/202505152 - Status: 404 - Time: 0.08s
+2025-06-11 20:44:43,970 - core.scraper - ERROR - Error fetching https://cdn.ssref.net/req/202505152: 404 Client Error: Not Found for url: https://cdn.ssref.net/req/202505152
+2025-06-11 20:44:53,135 - core.scraper - INFO - GET https://confiant-integrations.global.ssl.fastly.net - Status: 403 - Time: 0.25s
+2025-06-11 20:44:53,138 - core.scraper - ERROR - Error fetching https://confiant-integrations.global.ssl.fastly.net: 403 Client Error: Forbidden for url: https://confiant-integrations.global.ssl.fastly.net/
+2025-06-11 20:45:09,436 - core.fast_crawler - INFO - Fast crawl completed: 3 successful, 8 failed, 1 matched
+2025-06-11 20:45:09,787 - core.exporter - INFO - Exported CSV to Data/basketball-reference.com/fast_crawl_0_2025-06-11_20-45-09_table_table_1.csv
+2025-06-11 20:45:09,787 - core.exporter - INFO - Exported 1 CSV tables to Data/basketball-reference.com

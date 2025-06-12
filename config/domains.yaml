@@ -1,52 +1,41 @@
-# Domain-specific configuration
-# Add custom settings for specific domains
+# Domain-specific rate limiting configuration
+# Add domains that require special handling
 
-domains:
-  # Example configurations
-  wikipedia.org:
-    delay: 0.5                    # Faster for Wikipedia
-    selectors:
-      table: "table.wikitable"    # Wikipedia-specific table class
-    
-  example.com:
-    delay: 2.0                    # Slower for this domain
-    user_agent: "Custom User Agent for Example"
-    headers:
-      Accept: "text/html,application/json"
-      Accept-Language: "en-US,en;q=0.9"
-    
-  # Sports sites
-  espn.com:
-    delay: 1.5
-    subdomain_organization: true  # Organize by subdomain (nba/, nfl/, etc.)
-    selectors:
-      standings: "table.standings-table"
-      scores: "div.score-container"
-      
-  nba.com:
-    delay: 1.0
-    selectors:
-      stats: "table.stats-table"
-      standings: "table.standings"
-      
-  # News sites often require different handling
-  reuters.com:
-    delay: 2.0
-    cache_ttl: 1800  # 30 minutes for news
-    
-  bloomberg.com:
-    delay: 2.5
-    cache_ttl: 1800
-    
-# Rate limit groups
-# Sites in the same group share rate limiting
-rate_limit_groups:
-  news:
-    domains: ["reuters.com", "bloomberg.com", "cnn.com"]
-    delay: 2.0
-    max_concurrent: 2
-    
-  sports:
-    domains: ["espn.com", "nba.com", "nfl.com"]
-    delay: 1.5
-    max_concurrent: 3
+rate_limits:
+  # Sports sites often have strict rate limits
+  basketball-reference.com: 10.0  # 10 seconds between requests (increased due to 429 errors)
+  www.basketball-reference.com: 10.0
+  baseball-reference.com: 2.0
+  www.baseball-reference.com: 2.0
+  pro-football-reference.com: 2.0
+  www.pro-football-reference.com: 2.0
+  hockey-reference.com: 2.0
+  www.hockey-reference.com: 2.0
+  
+  # News sites
+  cnn.com: 1.0
+  bbc.com: 1.0
+  nytimes.com: 1.5
+  
+  # E-commerce
+  amazon.com: 2.0
+  ebay.com: 1.5
+  
+  # APIs and data sources
+  api.github.com: 0.5
+  api.twitter.com: 1.0
+  
+# Excluded URL patterns (regex)
+excluded_patterns:
+  - ".*\\/(login|signin|register|logout).*"
+  - ".*\\.pdf$"
+  - ".*\\/(ads?|advertisement).*"
+  - ".*\\/(share|print|email).*"
+  - ".*\\#comment.*"
+  - ".*utm_.*"
+  - ".*fbclid=.*"
+
+# User agents for specific domains
+user_agents:
+  default: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+  basketball-reference.com: "Mozilla/5.0 (compatible; MasterDataScraper/1.0; +https://github.com/yourusername/master-data-scraper)"

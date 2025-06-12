@@ -1,0 +1,187 @@
+# Blocked Domains Configuration
+# This file contains domains that should be skipped during crawling
+# These are typically ad networks, tracking services, and CDNs without content
+
+# Ad Networks & Tracking Services
+ad_networks:
+  - googletagservices.com
+  - googlesyndication.com
+  - googletagmanager.com
+  - google-analytics.com
+  - googleadservices.com
+  - doubleclick.net
+  - adsystem.com
+  - adsafeprotected.com
+  - amazon-adsystem.com
+  - facebook.com/tr
+  - facebook.com/plugins
+  - twitter.com/i/adsct
+  - linkedin.com/px
+  - pinterest.com/v3
+  - snapchat.com/tr
+  - tiktok.com/i18n/pixel
+  
+# Third-party Services
+third_party:
+  - pub.network
+  - btloader.com
+  - confiant-integrations.net
+  - confiant.co
+  - connatix.com
+  - outbrain.com
+  - taboola.com
+  - criteo.com
+  - criteo.net
+  - scorecardresearch.com
+  - quantserve.com
+  - quantcast.com
+  - quantcount.com
+  - comscore.com
+  - moatads.com
+  - adsrvr.org
+  - adnxs.com
+  - rubiconproject.com
+  - openx.net
+  - pubmatic.com
+  - spotxchange.com
+  - indexexchange.com
+  - casalemedia.com
+  - contextweb.com
+  - sovrn.com
+  - sharethrough.com
+  - districtm.io
+  - synacor.com
+  - yahoo.com/cms
+  - yimg.com/ads
+  
+# Analytics & Tracking
+analytics:
+  - mixpanel.com
+  - segment.io
+  - segment.com
+  - amplitude.com
+  - heap.io
+  - fullstory.com
+  - hotjar.com
+  - mouseflow.com
+  - crazyegg.com
+  - optimizely.com
+  - omtrdc.net
+  - demdex.net
+  - rlcdn.com
+  - nr-data.net
+  - newrelic.com
+  - pingdom.net
+  - bugsnag.com
+  - sentry.io
+  - rollbar.com
+  - trackjs.com
+  - loggly.com
+  - sumologic.com
+  
+# CDNs (typically don't contain content pages)
+cdns:
+  - cloudflare.com/cdn-cgi
+  - cdn.jsdelivr.net
+  - unpkg.com
+  - cdnjs.cloudflare.com
+  - ajax.googleapis.com
+  - fonts.googleapis.com
+  - code.jquery.com
+  - maxcdn.bootstrapcdn.com
+  - stackpath.bootstrapcdn.com
+  - use.fontawesome.com
+  - kit.fontawesome.com
+  
+# Social Media Widgets & Embeds
+social_widgets:
+  - platform.twitter.com
+  - platform.instagram.com
+  - connect.facebook.net
+  - platform.linkedin.com
+  - assets.pinterest.com
+  - static.addtoany.com
+  - s7.addthis.com
+  - sharethis.com
+  
+# Marketing & Email
+marketing:
+  - mailchimp.com
+  - constantcontact.com
+  - hubspot.com/hs
+  - marketo.com
+  - pardot.com
+  - eloqua.com
+  - sailthru.com
+  - braze.com
+  - customer.io
+  - intercom.io
+  - drift.com
+  - crisp.chat
+  - tawk.to
+  - livechat.com
+  - zendesk.com/embeddable
+  
+# Video Players (external)
+video_players:
+  - youtube.com/embed
+  - player.vimeo.com
+  - fast.wistia.net
+  - jwplatform.com
+  - brightcove.net
+  - dailymotion.com/embed
+  
+# Payment & Commerce
+payment:
+  - checkout.stripe.com
+  - paypal.com/sdk
+  - js.braintreegateway.com
+  - checkout.shopify.com
+  
+# Other Services
+other:
+  - disqus.com
+  - disquscdn.com
+  - gravatar.com
+  - wp.com/remote-login
+  - akismet.com
+  - recaptcha.net
+  - gstatic.com/recaptcha
+  - hcaptcha.com
+  - cloudflare.com/ajax
+  
+# File Extensions to Skip (not domains, but useful for filtering)
+skip_extensions:
+  - .pdf
+  - .doc
+  - .docx
+  - .xls
+  - .xlsx
+  - .ppt
+  - .pptx
+  - .zip
+  - .rar
+  - .tar
+  - .gz
+  - .7z
+  - .exe
+  - .dmg
+  - .pkg
+  - .deb
+  - .rpm
+  - .mp3
+  - .mp4
+  - .avi
+  - .mov
+  - .wmv
+  - .flv
+  - .webm
+  - .jpg
+  - .jpeg
+  - .png
+  - .gif
+  - .svg
+  - .ico
+  - .webp
+  - .bmp
+  - .tiff

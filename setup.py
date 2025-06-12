@@ -28,13 +28,9 @@ setup(
     install_requires=requirements,
     extras_require={
         'dev': [
-            'pytest>=8.0.0',
             'black>=24.1.0',
             'pylint>=3.0.0',
             'mypy>=1.8.0',
-            'coverage>=7.0.0',
-            'pytest-cov>=4.0.0',
-            'pytest-asyncio>=0.21.0',
         ]
     },
     python_requires='>=3.8',

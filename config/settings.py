@@ -24,10 +24,10 @@ class Settings:
     """Application settings"""
     
     # Scraping settings
-    default_delay: float = 1.0
+    default_delay: float = 0.1  # 100ms for faster scraping
     timeout: int = 30
     max_retries: int = 3
-    user_agent: str = "MasterDataScraper/1.0"
+    user_agent: str = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     respect_robots: bool = True
     verify_ssl: bool = True
     
@@ -50,12 +50,39 @@ class Settings:
     cache_max_size_mb: float = 100
     
     # Rate limiting
-    rate_limit_default: float = 1.0
-    rate_limit_concurrent: int = 5
+    rate_limit_default: float = 0.1  # 100ms for faster crawling
+    rate_limit_concurrent: int = 10  # More concurrent requests
     
     # Export settings
     default_export_format: str = "csv"
     compress_exports: bool = False
+    
+    # Smart crawl settings
+    smart_crawl_similarity_threshold: float = 0.3
+    smart_crawl_min_relevance_score: float = 0.4
+    smart_crawl_max_links_per_page: int = 10
+    smart_crawl_prioritize_high_relevance: bool = True
+    
+    # Scraping customization settings
+    scrape_metadata: bool = False
+    scrape_scripts: bool = False
+    scrape_styles: bool = False
+    scrape_headers: bool = True
+    scrape_images: bool = False
+    scrape_comments: bool = False
+    include_attributes: bool = True
+    include_page_info: bool = True
+    clean_whitespace: bool = True
+    
+    # File naming settings
+    naming_template: str = "{timestamp}_{element}_{domain}"
+    naming_include_timestamp: bool = True
+    naming_include_element: bool = True
+    naming_include_domain: bool = False
+    naming_include_title: bool = False
+    naming_date_format: str = "%Y%m%d_%H%M%S"
+    naming_max_length: int = 100
+    naming_use_url_slug: bool = False
     
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'Settings':
@@ -177,7 +204,7 @@ def create_default_config(output_path: Path = Path("config/settings.yaml")) -> N
     """
     default_config = {
         'scraping': {
-            'default_delay': 1.0,
+            'default_delay': 0.1,  # 100ms for speed
             'timeout': 30,
             'max_retries': 3,
             'user_agent': 'MasterDataScraper/1.0',
@@ -203,12 +230,39 @@ def create_default_config(output_path: Path = Path("config/settings.yaml")) -> N
             'cache_max_size_mb': 100
         },
         'rate_limiting': {
-            'rate_limit_default': 1.0,
-            'rate_limit_concurrent': 5
+            'rate_limit_default': 0.1,
+            'rate_limit_concurrent': 10
         },
         'export': {
             'default_export_format': 'csv',
             'compress_exports': False
+        },
+        'smart_crawl': {
+            'similarity_threshold': 0.3,
+            'min_relevance_score': 0.4,
+            'max_links_per_page': 10,
+            'prioritize_high_relevance': True
+        },
+        'scraping_customization': {
+            'scrape_metadata': False,
+            'scrape_scripts': False,
+            'scrape_styles': False,
+            'scrape_headers': True,
+            'scrape_images': False,
+            'scrape_comments': False,
+            'include_attributes': True,
+            'include_page_info': True,
+            'clean_whitespace': True
+        },
+        'file_naming': {
+            'naming_template': '{timestamp}_{element}_{domain}',
+            'naming_include_timestamp': True,
+            'naming_include_element': True,
+            'naming_include_domain': False,
+            'naming_include_title': False,
+            'naming_date_format': '%Y%m%d_%H%M%S',
+            'naming_max_length': 100,
+            'naming_use_url_slug': False
         }
     }
     

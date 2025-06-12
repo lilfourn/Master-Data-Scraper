@@ -23,3 +23,14 @@ ratelimit==2.2.1
 fake-useragent==1.4.0
 chardet==5.2.0  # For encoding detection
 urllib3==2.1.0  # URL parsing utilities
+
+# Async support
+aiohttp==3.9.3
+aiofiles==23.2.1
+asyncio==3.4.3
+
+# Advanced anti-detection
+numpy==1.26.3  # For human behavior simulation
+
+# Natural language processing
+nltk==3.8.1  # For relevance analysis
